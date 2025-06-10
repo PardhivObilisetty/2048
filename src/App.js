@@ -8,21 +8,20 @@ const App = () => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
-  const handleKeyDown = (event) => {
+  const handleMove = (direction) => {
     if (gameOver) return;
 
-    let direction;
-    if (event.key === "ArrowUp") direction = "up";
-    else if (event.key === "ArrowDown") direction = "down";
-    else if (event.key === "ArrowLeft") direction = "left";
-    else if (event.key === "ArrowRight") direction = "right";
+    const { board: newBoard, score: newScore } = moveTiles(board, direction, score);
+    setBoard([...newBoard]);
+    setScore(newScore);
+    if (checkGameOver(newBoard)) setGameOver(true);
+  };
 
-    if (direction) {
-      const { board: newBoard, score: newScore } = moveTiles(board, direction, score);
-      setBoard([...newBoard]);
-      setScore(newScore);
-      if (checkGameOver(newBoard)) setGameOver(true);
-    }
+  const handleKeyDown = (event) => {
+    if (event.key === "ArrowUp") handleMove("up");
+    else if (event.key === "ArrowDown") handleMove("down");
+    else if (event.key === "ArrowLeft") handleMove("left");
+    else if (event.key === "ArrowRight") handleMove("right");
   };
 
   const restartGame = () => {
@@ -42,12 +41,28 @@ const App = () => {
       <p>Score: {score}</p>
       {gameOver && <h2 className="game-over">Game Over! Press Restart</h2>}
       <button onClick={restartGame} className="restart-button">Restart</button>
+
       <div className="grid">
         {board.flat().map((tile, index) => (
-          <motion.div key={index} className={`tile ${tile ? `tile-${tile}` : ""}`} initial={{ scale: 0.8 }} animate={{ scale: 1 }}>
+          <motion.div
+            key={index}
+            className={`tile ${tile ? `tile-${tile}` : ""}`}
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+          >
             {tile}
           </motion.div>
         ))}
+      </div>
+
+      {/* On-screen arrow buttons for mobile control */}
+      <div className="controls">
+        <button onClick={() => handleMove("up")} className="arrow up">↑</button>
+        <div className="horizontal-buttons">
+          <button onClick={() => handleMove("left")} className="arrow left">←</button>
+          <button onClick={() => handleMove("right")} className="arrow right">→</button>
+        </div>
+        <button onClick={() => handleMove("down")} className="arrow down">↓</button>
       </div>
     </div>
   );

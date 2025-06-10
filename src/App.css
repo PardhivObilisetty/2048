@@ -1,64 +1,141 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: #f8f8f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  background: linear-gradient(to right, #fceabb, #f8b500);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 48px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 24px;
+  color: #444;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-gap: 10px;
+  background: #bbada0;
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  margin: 20px auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.tile {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: #776e65;
+  background: #eee4da;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+}
+
+.tile-2    { background: #eee4da; }
+.tile-4    { background: #ede0c8; }
+.tile-8    { background: #f2b179; color: #fff; }
+.tile-16   { background: #f59563; color: #fff; }
+.tile-32   { background: #f67c5f; color: #fff; }
+.tile-64   { background: #f65e3b; color: #fff; }
+.tile-128  { background: #edcf72; color: #fff; }
+.tile-256  { background: #edcc61; color: #fff; }
+.tile-512  { background: #edc850; color: #fff; }
+.tile-1024 { background: #edc53f; color: #fff; }
+.tile-2048 { background: #edc22e; color: #fff; }
+
+.restart-button {
+  background: #ff5733;
+  border: none;
+  padding: 12px 24px;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 6px #d9432a;
+}
+
+.restart-button:hover {
+  background: #e04a29;
+}
+
+.restart-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px #a32c1a;
+}
+
+.game-over {
+  color: #e63946;
+  font-size: 22px;
+  font-weight: bold;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Controls section for mobile play */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.horizontal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 12px 0;
+}
+
+.arrow {
+  font-size: 28px;
+  padding: 14px 20px;
+  margin: 4px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 5px #388E3C;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.arrow:hover {
+  background-color: #45a049;
+}
+
+.arrow:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px #2E7D32;
+}
+
+/* Hide controls on desktop */
+@media (min-width: 768px) {
+  .controls {
+    display: none;
   }
-  
-  .container {
-    margin-top: 30px;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-gap: 10px;
-    background: #bbada0;
-    padding: 10px;
-    border-radius: 10px;
-    width: 450px;
-    margin: auto;
-  }
-  
-  .tile {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 5px;
-    background: #eee4da;
-  }
-  
-  .tile-2 { background: #eee4da; }
-  .tile-4 { background: #ede0c8; }
-  .tile-8 { background: #f2b179; }
-  .tile-16 { background: #f59563; }
-  .tile-32 { background: #f67c5f; }
-  .tile-64 { background: #f65e3b; }
-  .tile-128 { background: #bf3e21; }
-  .tile-256 { background: #812a17; }
-  .tile-512 { background: #611e0f; }
-  .tile-1024 { background: #4a1205; }
-  
-  .restart-button {
-    background: #ff5733;
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 15px;
-  }
-  
-  .restart-button:hover {
-    background: #d9432a;
-  }
-  
-  .game-over {
-    color: red;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
+}
